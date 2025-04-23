@@ -1,7 +1,7 @@
 ## Fix Callout Error
 Currently, using the `<` symbol in a callout code block will disrupt the parsing of the entire note.
 
-This plugin is a simple solution with only [32 lines of code](https://github.com/guopenghui/obsidian-fix-callout/blob/master/src/main.ts).
+This plugin is a simple solution with only [32 lines of code](https://github.com/guopenghui/obsidian-fix-callout/blob/master/main.ts).
 
 Core logic is here:
 ```ts
