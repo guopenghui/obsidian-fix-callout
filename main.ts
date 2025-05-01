@@ -11,21 +11,28 @@ export default class FixCallout extends Plugin {
 
 function fixedHyperMD() {
     // @ts-ignore
-    const hyperMode = CodeMirror.getMode({}, { name: "hypermd" });
+    const _hyperMode = CodeMirror.getMode({}, { name: "hypermd" });
     return StreamLanguage.define({
-        ...hyperMode,
+        ..._hyperMode,
         token(stream: CodeMirror.StringStream, state: any) {
-            // There is a ```, oh I'm entering or exiting a codeblock
-            if (state.quote && stream.match(/^```/)) {
-                state.__iscode = !state.__iscode;
-                return null;
-            }
-            // If I'm in a codeblock, ignore '<', so it's not parsed as HTML
-            if (state.quote && state.__iscode && stream.match(/^</)) {
-                return "bad-<";
+            // If I'm in a '>' block
+            if (state.quote) {
+                // There is a ```, or I'm entering or exiting a codeblock
+                if (stream.match(/^```/)) {
+                    state.__iscode = !state.__iscode;
+                    return null;
+                }
+                // If I'm in a codeblock
+                if (state.__iscode) {
+                    // ignore '<', so it's not parsed as HTML
+                    if (stream.match(/^</)) return "bad-<";
+                }
+
+                // ignore '%%', so it's not parsed as a comment
+                if (stream.match(/^%%/)) return "bad-%%";
             }
             // Obsidian built-in parser takes care of the rest
-            return hyperMode.token(stream, state);
+            return _hyperMode.token(stream, state);
         },
     } as any);
 }

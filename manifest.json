@@ -3,7 +3,7 @@
     "name": "Fix Callout",
     "version": "0.0.1",
     "minAppVersion": "0.15.0",
-    "description": "Fix <> parsing errors of codeblock in Callout",
+    "description": "Fix some parsing errors of codeblock in the callout and quote.",
     "author": "the_tree",
     "isDesktopOnly": false
 }
