@@ -6,7 +6,6 @@ export default class FixCallout extends Plugin {
     async onload() {
         this.registerEditorExtension(Prec.high(fixedHyperMD()));
     }
-    onunload() {}
 }
 
 function fixedHyperMD() {
@@ -27,5 +26,11 @@ function fixedHyperMD() {
             // Obsidian built-in parser takes care of the rest
             return hyperMode.token(stream, state);
         },
+        copyState(state: any) {
+            return {
+                __iscode: state.__iscode,
+                ...hyperMode.copyState!(state) as any
+            }
+        }
     } as any);
 }
