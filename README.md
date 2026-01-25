@@ -1,5 +1,9 @@
 ## Fix Callout Error
 
+>[!warning]
+>This issue has been fixed in the latest version of Obsidian, so this project is archived and only serves as a reference for plugin development.
+
+
 Currently, using the `<` symbol in a callout code block will disrupt the parsing of the entire note.
 
 This plugin is a simple solution with only [36 lines of code](https://github.com/guopenghui/obsidian-fix-callout/blob/master/main.ts).
